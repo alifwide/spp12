@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         as:"petugas"
       })
 
-      pembayaran.belongsTo(models.siswa, {
+      pembayaran.belongsTo(models.spp, {
         foreignKey:"id_spp",
         as:"spp"
       })

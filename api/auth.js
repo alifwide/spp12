@@ -2,6 +2,7 @@ const db = require("./models/index.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const config = require("./server.config.js");
+var mysql = require('mysql2/promise');
 
 //authorization : giving permission for someone with given identity
 
@@ -11,66 +12,49 @@ const authorize = async (level, username, plainPassword, callback) => {
 		level: level,
 		message: "",
 	};
+	var con = await mysql.createConnection({
+		host: "localhost",
+		user: "root",
+		password: "",
+		database: "db_spp"
+	});
 
 	if (username && plainPassword && level) {
-		if (level == "admin") {
-			const found = await db.petugas.findAll({
-				where: { username: username },
-			});
+		if (level == "admin" || level == "petugas") {
+			const query = "select * from petugas where username=? and level=?";
+			const [found,fields] = await con.execute(query, [username, level])
 			//if username deoesn't exist in the database
 			if (found.length <= 0) {
-				response.message = "username not found";
+				response.message = "Username " + username + " as " + level + " not found";
 			} else {
 				const result = bcrypt.compareSync(
 					plainPassword,
 					found[0].password
 				);
 				if (!result) {
-					response.message = "wrong password";
+					response.message = "Wrong password";
 				} else {
 					response.message = "logged in";
 					response.token = jwt.sign(
 						{ username: username, level: level },
-						config.ADMIN_KEY,
-						{ expiresIn: "30d" }
-					);
-				}
-			}
-		} else if (level == "petugas") {
-			const found = await db.petugas.findAll({
-				where: { username: username },
-			});
-			//if username deoesn't exist in the database
-			if (found.length <= 0) {
-				response.message = "username not found";
-			} else {
-				const result = bcrypt.compareSync(
-					plainPassword,
-					found[0].password
-				);
-				if (!result) {
-					response.message = "wrong password";
-				} else {
-					response.message = "logged in";
-					response.token = jwt.sign(
-						{ username: username, level: level },
-						config.PETUGAS_KEY,
+						(level == "admin" ? config.ADMIN_KEY : config.PETUGAS_KEY),
 						{ expiresIn: "30d" }
 					);
 				}
 			}
 		} else {
-			const found = await db.siswa.findAll({ where: { nisn: username } });
+			const query = "select * from petugas where nisn=?";
+			const [found,fields] = await con.execute(query, [nisn])
 			//if username deoesn't exist in the database
 			if (found.length <= 0) {
-				response.message = "username not found";
+				response.message = "NISN " + username + " as " + level + " not found";
 			} else {
 				const result = bcrypt.compareSync(
 					plainPassword,
 					found[0].password
 				);
 				if (!result) {
-					response.message = "wrong password";
+					response.message = "Wrong password";
 				} else {
 					response.message = "logged in";
 					response.token = jwt.sign(
@@ -82,8 +66,9 @@ const authorize = async (level, username, plainPassword, callback) => {
 			}
 		}
 	} else {
-		response.message = "data incomplete";
+		response.message = "Data incomplete";
 	}
+	con.close()
 	callback(response);
 };
 

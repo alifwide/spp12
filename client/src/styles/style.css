@@ -3,10 +3,21 @@
     margin-top: 50px;
     width: 50%;
     border: solid 1px black;
-    text-align: center;
     border-radius: 2px;
 }
 
 .login-form {
     margin: 20px
+}
+
+.login-select-priv{
+    text-align: left;
+}
+
+.btn-padding{
+    margin: 3px;
+}
+
+.crudTable{
+    overflow: auto
 }
