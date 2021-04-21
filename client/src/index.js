@@ -10,7 +10,9 @@ import {
 import LoginAdmin from "./pages/LoginAdmin.js";
 import LoginSiswa from "./pages/LoginSiswa.js";
 import Home from "./pages/HomeAdmin.js";
+import HomePetugas from "./pages/HomePetugas.js";
 import Tes from "./pages/Tes.js"
+import History from "./pages/History.js"
 
 function App() {
     return (
@@ -19,9 +21,9 @@ function App() {
                 <Route path="/loginAdmin" component={LoginAdmin} />
                 <Route path="/LoginSiswa" component={LoginSiswa} />
                 <Route path="/HomeAdmin" component={Home} />
-                <Route path="/HomeSiswa" component={Home} />
+                <Route path="/homepetugas" component={HomePetugas} />
                 <Route path="/tes" component={Tes} />
-
+                <Route path="/History" component={History} />
             </Switch>
         </Router>
     );

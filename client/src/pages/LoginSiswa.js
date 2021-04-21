@@ -23,9 +23,10 @@ export default function LoginSiswa() {
         }).then((response) => {
             if (response.data.token) {
                 setMessage("");
-                localStorage.setItem("token", response.data.token);
-                localStorage.setItem("level", response.data.level);
-                history.push("/homesiswa");
+                localStorage.setItem("nisn", response.data.nisn)
+                localStorage.setItem("token", response.data.token)
+                localStorage.setItem("level", response.data.level)
+                history.push("/history");
             } else {
                 setMessage(response.data.message);
             }
