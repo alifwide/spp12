@@ -1,21 +1,22 @@
+
 {
   "development": {
-    "username": "root",
-    "password": null,
+    "username": "alipw",
+    "password": "werta3321",
     "database": "db_spp",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": "alipw",
+    "password": "werta3321",
     "database": "db_spp",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": "alipw",
+    "password": "werta3321",
     "database": "db_spp",
     "host": "127.0.0.1",
     "dialect": "mysql"

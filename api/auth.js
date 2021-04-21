@@ -14,8 +14,8 @@ const authorize = async (level, username, plainPassword, callback) => {
 	};
 	var con = await mysql.createConnection({
 		host: "localhost",
-		user: "root",
-		password: "",
+		user: "alipw",
+		password: "werta3321",
 		database: "db_spp"
 	});
 
@@ -37,14 +37,14 @@ const authorize = async (level, username, plainPassword, callback) => {
 					response.message = "logged in";
 					response.token = jwt.sign(
 						{ username: username, level: level },
-						(level == "admin" ? config.ADMIN_KEY : config.PETUGAS_KEY),
+						(level === "admin" ? config.ADMIN_KEY : config.PETUGAS_KEY),
 						{ expiresIn: "30d" }
 					);
 				}
 			}
 		} else {
-			const query = "select * from petugas where nisn=?";
-			const [found,fields] = await con.execute(query, [nisn])
+			const query = "select * from siswa where nisn=?";
+			const [found,fields] = await con.execute(query, [username])
 			//if username deoesn't exist in the database
 			if (found.length <= 0) {
 				response.message = "NISN " + username + " as " + level + " not found";
@@ -62,6 +62,8 @@ const authorize = async (level, username, plainPassword, callback) => {
 						config.SISWA_KEY,
 						{ expiresIn: "30d" }
 					);
+					response.nisn = username;
+					console.log(response)
 				}
 			}
 		}

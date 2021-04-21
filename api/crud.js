@@ -1,12 +1,9 @@
-
 /* 
 	universal CRUD endpoint system
 	this one file handles all the crud events
 */
 
-var mysql = require('mysql2/promise');
-
-
+var mysql = require("mysql2/promise");
 const app = require("express")();
 const db = require("./models/index.js");
 const bodyParser = require("body-parser");
@@ -17,22 +14,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //GET request
 
 app.get("/:table_name", async (req, res) => {
-	console.log(req.params.table_name)
+	console.log(req.params.table_name);
 	var con = await mysql.createConnection({
 		host: "localhost",
-		user: "root",
-		password: "",
-		database: "db_spp"
+		user: "alipw",
+		password: "werta3321",
+		database: "db_spp",
 	});
 	try {
 		const query = "select * from " + req.params.table_name;
-		const [result,fields] = await con.execute(query);
+		const [result, fields] = await con.execute(query);
 		res.json(result);
 	} catch (error) {
 		console.log(error);
 		res.status(500).json(error.message);
 	}
-	con.close()
+	con.close();
 });
 
 //GET request with specified id/primary key value
@@ -116,28 +113,34 @@ app.delete("/:table_name", async (req, res) => {
 	}
 });
 
-app.get("/msc/tableinfo/:table_name",async (req, res) => {
-
+app.get("/msc/tableinfo/:table_name", async (req, res) => {
 	async function addReferenceData(tableInfo, callback) {
 		let reference_ids = {};
 		var con = await mysql.createConnection({
 			host: "localhost",
-			user: "root",
-			password: "",
-			database: "db_spp"
+			user: "alipw",
+			password: "werta3321",
+			database: "db_spp",
 		});
-		for(let key of Object.keys(tableInfo)){
-			if(tableInfo[key].references){
-				const[result,fields] = await con.execute("SELECT " +  tableInfo[key].references.key + " FROM " + tableInfo[key].references.model)
-				reference_ids[tableInfo[key].references.model] = []
-				for(i of result){
-					reference_ids[tableInfo[key].references.model].push(i[tableInfo[key].references.key])
+		for (let key of Object.keys(tableInfo)) {
+			if (tableInfo[key].references) {
+				const [result, fields] = await con.execute(
+					"SELECT " +
+						tableInfo[key].references.key +
+						" FROM " +
+						tableInfo[key].references.model
+				);
+				reference_ids[tableInfo[key].references.model] = [];
+				for (i of result) {
+					reference_ids[tableInfo[key].references.model].push(
+						i[tableInfo[key].references.key]
+					);
 				}
 			}
-		};
+		}
 		tableInfo["reference_ids"] = reference_ids;
-		con.close()
-		callback(tableInfo)
+		con.close();
+		callback(tableInfo);
 	}
 
 	try {
@@ -146,7 +149,7 @@ app.get("/msc/tableinfo/:table_name",async (req, res) => {
 		delete tableInfo["createdAt"];
 		delete tableInfo["updatedAt"];
 		addReferenceData(tableInfo, (tableInfo) => {
-			res.send(tableInfo)
+			res.send(tableInfo);
 		});
 	} catch (error) {
 		console.log(error);

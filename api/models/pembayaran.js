@@ -16,10 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         as:"petugas"
       })
 
-      pembayaran.belongsTo(models.spp, {
-        foreignKey:"id_spp",
-        as:"spp"
-      })
 
       pembayaran.belongsTo(models.siswa, {
         foreignKey:"nisn",
@@ -36,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     id_petugas: DataTypes.INTEGER,
     nisn: DataTypes.STRING,
     tgl_bayar: DataTypes.DATE,
-    id_spp: DataTypes.INTEGER,
     jumlah_bayar: DataTypes.INTEGER
   }, {
     sequelize,
