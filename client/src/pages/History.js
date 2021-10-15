@@ -9,6 +9,10 @@ export default function History() {
     const [nisn,setNisn] = useState("")
 
     let history = useHistory();
+    
+    function logOut(){
+        localStorage.clear()
+    }
 
     function initialize() {
         if (!localStorage.getItem("token") || !localStorage.getItem("nisn")) {
@@ -141,7 +145,7 @@ export default function History() {
                         </form>
                         <ul className="nav navbar-nav navbar-right">
                             <li>
-                                <Link to="/loginsiswa">Logout</Link>
+                                <Link to="/loginsiswa" onClick = {logOut}>Logout</Link>
                             </li>
                         </ul>
                     </div>

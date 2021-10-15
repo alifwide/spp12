@@ -18,7 +18,6 @@ export default function LoginSiswa() {
             data: {
                 level: "siswa",
                 username: NISN,
-                password: password,
             },
         }).then((response) => {
             if (response.data.token) {
@@ -48,17 +47,6 @@ export default function LoginSiswa() {
                             placeholder="Enter NISN"
                             value={NISN}
                             onChange={(ev) => setNISN(ev.target.value)}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(ev) => setPassword(ev.target.value)}
                         />
                     </div>
                     <p className="text-danger">{message}</p>
