@@ -10,10 +10,13 @@ const cors = require("cors");
 const mysql = require("mysql2/promise")
 const bcrypt = require("bcrypt")
 
+const config = require('./server.config')
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+db.sequelize.sync({force:true})
 
 app.use("/api/crud", auth0.authenticate, crud);
 
@@ -31,10 +34,10 @@ app.post("/api/login", (req, res) => {
 app.get("/api/siswa/history/:nisn", auth0.authenticate2, async(req, res) => {
 	try {
 		var con = await mysql.createConnection({
-			host: "localhost",
-			user: "alipw",
-			password: "werta3321",
-			database: "db_spp",
+			host: config.mysql.host,
+			user: config.mysql.user,
+			password: config.mysql.password,
+			database: config.mysql.database,
 		});
 		const query = "select * from pembayaran";
 		const [result, fields] = await con.execute(query, [req.params.nisn]);
@@ -55,10 +58,10 @@ app.get("/api/siswa/history/:nisn", auth0.authenticate2, async(req, res) => {
 app.get("/api/petugas/history/history/history", auth0.authenticate3, async (req, res) => {
 	try {
 		var con = await mysql.createConnection({
-			host: "localhost",
-			user: "alipw",
-			password: "werta3321",
-			database: "db_spp",
+			host: config.mysql.host,
+			user: config.mysql.user,
+			password: config.mysql.password,
+			database: config.mysql.database,
 		});
 		const query = "select * from pembayaran";
 		const [result, fields] = await con.execute(query);
@@ -78,10 +81,10 @@ app.get("/api/petugas/crud/tableinfo/pembayaran", auth0.authenticate3, async (re
 	async function addReferenceData(tableInfo, callback) {
 		let reference_ids = {};
 		var con = await mysql.createConnection({
-			host: "localhost",
-			user: "alipw",
-			password: "werta3321",
-			database: "db_spp",
+			host: config.mysql.host,
+			user: config.mysql.user,
+			password: config.mysql.password,
+			database: config.mysql.database,
 		});
 		for (let key of Object.keys(tableInfo)) {
 			if (tableInfo[key].references) {

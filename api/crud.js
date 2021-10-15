@@ -9,6 +9,8 @@ const db = require("./models/index.js");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcrypt");
 
+const config = require('./server.config');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //GET request
@@ -16,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/:table_name", async (req, res) => {
 	console.log(req.params.table_name);
 	var con = await mysql.createConnection({
-		host: "localhost",
-		user: "alipw",
-		password: "werta3321",
-		database: "db_spp",
+		host: config.mysql.host,
+		user: config.mysql.user,
+		password: config.mysql.password,
+		database: config.mysql.database,
 	});
 	try {
 		const query = "select * from " + req.params.table_name;
@@ -117,10 +119,10 @@ app.get("/msc/tableinfo/:table_name", async (req, res) => {
 	async function addReferenceData(tableInfo, callback) {
 		let reference_ids = {};
 		var con = await mysql.createConnection({
-			host: "localhost",
-			user: "alipw",
-			password: "werta3321",
-			database: "db_spp",
+			host: config.mysql.host,
+			user: config.mysql.user,
+			password: config.mysql.password,
+			database: config.mysql.database,
 		});
 		for (let key of Object.keys(tableInfo)) {
 			if (tableInfo[key].references) {
@@ -144,7 +146,6 @@ app.get("/msc/tableinfo/:table_name", async (req, res) => {
 	}
 
 	try {
-		const primaryKey = db[req.params.table_name].primaryKeyAttributes;
 		const tableInfo = db[req.params.table_name].rawAttributes;
 		delete tableInfo["createdAt"];
 		delete tableInfo["updatedAt"];

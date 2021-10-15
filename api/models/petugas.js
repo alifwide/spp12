@@ -22,10 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     nama_petugas: DataTypes.STRING,
-    level: DataTypes.STRING
+    level: DataTypes.ENUM('petugas','admin')
   }, {
     sequelize,
     tableName: 'petugas',
+    timestamps: false,
   });
   return petugas;
 };

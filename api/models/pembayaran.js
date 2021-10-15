@@ -9,34 +9,37 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      pembayaran.belongsTo(models.petugas, {
-        foreignKey:"id_petugas",
-        as:"petugas"
-      })
-
-
-      pembayaran.belongsTo(models.siswa, {
-        foreignKey:"nisn",
-        as:"fore_nisn"
-      })
-    }
+    static associate(models) {}
   };
   pembayaran.init({
     id_pembayaran: {
-      type:DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement:true
+      autoIncrement: true
     },
-    id_petugas: DataTypes.INTEGER,
-    nisn: DataTypes.STRING,
+    id_petugas: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      references: {
+        model: 'petugas',
+        key: 'id_petugas',
+      }
+    },
+    nisn: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      references: {
+        model: 'siswa',
+        key: 'nisn'
+      }
+    },
     tgl_bayar: DataTypes.DATE,
     bulan_spp: DataTypes.INTEGER,
     tahun_spp: DataTypes.INTEGER
   }, {
     sequelize,
     tableName: 'pembayaran',
+    timestamps: false,
   });
   return pembayaran;
 };

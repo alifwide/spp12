@@ -9,33 +9,29 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
-      this.belongsTo(models.spp,{
-        foreignKey: "id_spp",
-        as: "spp"
-      })
-      // kelas
-      this.belongsTo(models.kelas,{
-        foreignKey: "id_kelas",
-        as: "kelas"
-      })
-    }
+    static associate(models) {}
   };
   siswa.init({
-    nisn:{
-      type:DataTypes.STRING,
-      primaryKey:true,
-      autoIncrement:false
+    nisn: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      autoIncrement: false
     },
     nis: DataTypes.STRING,
     nama: DataTypes.STRING,
-    id_kelas: DataTypes.INTEGER,
+    id_kelas: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'kelas',
+        key: 'id_kelas',
+      }
+    },
     alamat: DataTypes.STRING,
     no_telp: DataTypes.STRING,
   }, {
     sequelize,
     tableName: 'siswa',
+    timestamps: false,
   });
   return siswa;
 };

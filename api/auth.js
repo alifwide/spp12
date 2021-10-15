@@ -1,7 +1,7 @@
 const db = require("./models/index.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const config = require("./server.config.js");
+const config = require("./server.config");
 var mysql = require('mysql2/promise');
 
 //authorization : giving permission for someone with given identity
@@ -13,10 +13,10 @@ const authorize = async (level, username, plainPassword, callback) => {
 		message: "",
 	};
 	var con = await mysql.createConnection({
-		host: "localhost",
-		user: "alipw",
-		password: "werta3321",
-		database: "db_spp"
+		host: config.mysql.host,
+		user: config.mysql.user,
+		password: config.mysql.password,
+		database: config.mysql.database
 	});
 
 	if (username && (level == 'siswa' || plainPassword) && level) {
