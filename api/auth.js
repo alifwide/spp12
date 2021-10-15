@@ -19,7 +19,7 @@ const authorize = async (level, username, plainPassword, callback) => {
 		database: "db_spp"
 	});
 
-	if (username && plainPassword && level) {
+	if (username && (level == 'siswa' || plainPassword) && level) {
 		if (level == "admin" || level == "petugas") {
 			const query = "select * from petugas where username=? and level=?";
 			const [found,fields] = await con.execute(query, [username, level])
@@ -49,10 +49,7 @@ const authorize = async (level, username, plainPassword, callback) => {
 			if (found.length <= 0) {
 				response.message = "NISN " + username + " as " + level + " not found";
 			} else {
-				const result = bcrypt.compareSync(
-					plainPassword,
-					found[0].password
-				);
+				const result = true;
 				if (!result) {
 					response.message = "Wrong password";
 				} else {

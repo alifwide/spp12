@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement:true
     },
+    angkatan: DataTypes.INTEGER,
     tahun: DataTypes.INTEGER,
     nominal: DataTypes.INTEGER
   }, {

@@ -28,13 +28,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey:true,
       autoIncrement:false
     },
-    password: DataTypes.STRING,
     nis: DataTypes.STRING,
     nama: DataTypes.STRING,
     id_kelas: DataTypes.INTEGER,
     alamat: DataTypes.STRING,
     no_telp: DataTypes.STRING,
-    id_spp: DataTypes.INTEGER
   }, {
     sequelize,
     tableName: 'siswa',

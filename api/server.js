@@ -14,6 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 app.use("/api/crud", auth0.authenticate, crud);
 
 app.post("/api/login", (req, res) => {
@@ -118,7 +119,7 @@ app.get("/api/petugas/crud/tableinfo/pembayaran", auth0.authenticate3, async (re
 });
 
 app.post("/api/petugas/crud/pembayaran", auth0.authenticate3, async (req, res) => {
-	//hashing the password, if there's any (some of the table doesn't need password to insert, so we don't need to hash anything)
+	//hashing the password, if there's any. (some of the table doesn't need password to insert, so we don't need to hash anything)
 	bcrypt.hash(req.body.password, 10, async function (err, hash) {
 		//if there's any password to hash then set the current plain password to the already hashed one
 		if (!err) req.body.password = hash;

@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement:true
     },
     nama_kelas: DataTypes.STRING,
-    kompetensi_keahlian: DataTypes.STRING
+    jurusan: DataTypes.STRING,
+    angkatan: DataTypes.INTEGER
   }, {
     sequelize,
     tableName: 'kelas',
