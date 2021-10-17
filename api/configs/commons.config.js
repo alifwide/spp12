@@ -24,6 +24,20 @@ module.exports = {
     ADMIN_DEFAULT_PASS: '56f83f748sd913bb8997eeJFde1235d7bd3c3f938f1fd873c56d0gsjkJg9234afk2f1171cK4d4047125680FD47179f77a8cf6sFD605',
     PETUGAS_DEFAULT_USER: 'petugas',
     PETUGAS_DEFAULT_PASS: 'bukansiswapokoknyaseriusangakngehack'
+  },
+
+  levels: {
+    admin: "admin",
+    petugas: "petugas",
+    siswa: "siswa",
+  },
+
+  tables: {
+    spp: 'spp',
+    kelas: 'kelas',
+    siswa: 'siswa',
+    pembayaran: 'pembayaran', 
+    petugas: 'petugas'
   }
 
 }

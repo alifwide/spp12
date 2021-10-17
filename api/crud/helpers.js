@@ -1,8 +1,4 @@
-const { tables } = require('./schemas');
-const {
-  res_statuses,
-  res_err_messages
-} = require('../configs/commons.config');
+const { res_statuses, res_err_messages, tables } = require('../configs/commons.config');
 
 
 module.exports = {

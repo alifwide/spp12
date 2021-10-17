@@ -4,11 +4,10 @@ const bcrypt = require('bcryptjs');
 const crud = require('../crud/crud');
 
 const commons_config = require('../configs/commons.config');
-const { levels } = require('./schemas');
-const { tables } = require('../crud/schemas');
 const { ADMIN_DEFAULT_USER, ADMIN_DEFAULT_PASS, PETUGAS_DEFAULT_USER, PETUGAS_DEFAULT_PASS } = commons_config.default_accounts;
 const { ADMIN_KEY, PETUGAS_KEY, SISWA_KEY } = commons_config.jwt_keys;
 const { res_statuses, res_err_messages } = commons_config;
+const { levels, tables } = commons_config;
 
 
 //only for handler
