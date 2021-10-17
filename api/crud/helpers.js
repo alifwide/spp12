@@ -1,4 +1,4 @@
-const {tables} = require('./schemas');
+const { tables } = require('./schemas');
 const {
   res_statuses,
   res_err_messages

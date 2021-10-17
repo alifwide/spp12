@@ -1,7 +1,7 @@
 const app = require('express')();
 const bodyParser = require('body-parser');
 const crud = require('../crud/crud');
-const { table_validator } = require('../crud/middlewares');
+const { table_validator } = require('../crud/helpers');
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -23,7 +23,6 @@ app.post('/:tableName', table_validator, async (req, res) => {
   const {
     payloadData
   } = req.body;
-  console.log(req.body)
 
   const result = await crud.insert(tableName, payloadData);
 

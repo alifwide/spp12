@@ -1,9 +1,11 @@
-module.exports = {
+module.exports  = {
+
   tables: {
-    spp: true,
-    kelas: true,
-    siswa: true,
-    pembayaran: true, 
-    petugas: true
+    spp: 'spp',
+    kelas: 'kelas',
+    siswa: 'siswa',
+    pembayaran: 'pembayaran', 
+    petugas: 'petugas'
   }
+  
 }

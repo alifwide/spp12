@@ -10,6 +10,32 @@ const { res_statuses } = require('../configs/commons.config');
   }
 */
 
+
+const findOne = async (tableName, where) => {
+
+  let result = {
+    status: '',
+    value: '',
+    err: ''
+  }
+
+  return new Promise(async (resolve) => {
+    try {
+      result.value = await model[tableName].findOne({
+        raw: true,
+        where: where
+      });
+    } catch (err) {
+      result.err = err.message;
+    }
+    if (result.err) result.status = res_statuses.STATUS_FAIL;
+    else result.status = res_statuses.STATUS_SUCCESS;
+    resolve(result);
+  });
+
+}
+
+
 const findAll = (tableName) => {
 
   let result = {
@@ -121,6 +147,7 @@ const update = async (tableName, data, where) => {
 // testExec()
 
 module.exports = {
+  findOne,
   findAll,
   insert,
   remove,
