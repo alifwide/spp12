@@ -1,5 +1,5 @@
 
-const config = require('../server.config')
+const config = require('./server.config')
 
 module.exports = {
   "development": {

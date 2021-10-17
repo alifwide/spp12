@@ -2,7 +2,7 @@ const {tables} = require('./schemas');
 const {
   res_statuses,
   res_err_messages
-} = require('../commons.config');
+} = require('../configs/commons.config');
 
 
 module.exports = {

@@ -1,5 +1,5 @@
 const model = require('../models/index')
-const { res_statuses } = require('../commons.config');
+const { res_statuses } = require('../configs/commons.config');
 
 /*
   resolve schema : 
