@@ -65,7 +65,7 @@ const authorize_admin = (username, password) => {
 
     } else {
 
-      const searchResult = await crud.findOne(tables.petugas, { username: username });
+      const searchResult = await crud.findOne(tables.petugas, { username: username, level: levels.admin });
       const { err, value } = searchResult;
 
       if( err || !value ){
@@ -118,7 +118,7 @@ const authorize_petugas = (username, password) => {
 
     } else {
 
-      const searchResult = await crud.findOne(tables.petugas, { username: username });
+      const searchResult = await crud.findOne(tables.petugas, { username: username, level: levels.petugas });
       const { err, value } = searchResult;
 
       if( err || !value ){
