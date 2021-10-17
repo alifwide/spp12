@@ -10,7 +10,8 @@ module.exports = {
     LEVEL_NOT_VALID: level => `level ${level} is not valid`,
     USERNAME_NOT_FOUND: username => `username ${username} not found`,
     NISN_NOT_FOUND: nisn => `NISN ${nisn} not found`,
-    WRONG_PASSWORD: 'wrong password'
+    WRONG_PASSWORD: 'wrong password',
+    INVALID_TOKEN: 'invalid token'
   },
 
   jwt_keys: {

@@ -3,7 +3,6 @@ const { res_statuses, res_err_messages, tables } = require('../configs/commons.c
 
 module.exports = {
 
-
   table_validator: (req, res, next) => {
     const tableName = req.params.tableName;
     let result = {
@@ -19,6 +18,5 @@ module.exports = {
       res.send(result);
     }
   }
-
 
 }

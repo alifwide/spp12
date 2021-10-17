@@ -1,8 +1,6 @@
 const { res_statuses, res_err_messages, levels } = require('../configs/commons.config');
 
-
 module.exports = {
-
 
   level_validator: (req, res, next) => {
     const level = req.params.level;

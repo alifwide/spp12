@@ -6,12 +6,13 @@ const cors = require('cors');
 const { ports, endpoints } = require('./configs/server.config')
 const crud_router = require('./routes/crud_router');
 const authorize_router = require('./routes/authorization_router');
+const {admin_authenticate, petugas_authenticate, siswa_authenticate} = require('./authentication/authentication')
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(endpoints.BASE_ENDPOINT + endpoints.CRUD_ENDPOINT , crud_router);
+app.use(endpoints.BASE_ENDPOINT + endpoints.CRUD_ENDPOINT, admin_authenticate , crud_router);
 app.use(endpoints.BASE_ENDPOINT + endpoints.AUTHORIZATION_ENDPOINT , authorize_router);
 
 app.listen(ports.SERVER_PORT, () => {
