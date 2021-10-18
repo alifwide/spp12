@@ -133,6 +133,17 @@ const update = async (tableName, data, where) => {
 
 }
 
+const getTableInfo = async (tableName) => {
+  
+  let result = {
+    status: '',
+    value: '',
+    err: ''
+  }
+
+
+}
+
 // const testExec = async () => {
 //   const payloadData = {
 //     angkatan : 28,
