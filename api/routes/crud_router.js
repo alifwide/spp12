@@ -57,4 +57,12 @@ app.put('/:tableName', table_validator, async (req, res) => {
 
 });
 
+app.get('/msc/tableInfo/:tableName', table_validator, async (req, res) => {
+  
+  const tableName = req.params.tableName;
+  const result = await crud.getColumns(tableName);
+
+  res.send(result);
+})
+
 module.exports = app;
