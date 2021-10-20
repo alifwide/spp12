@@ -7,6 +7,11 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+/* 
+  some of the function is using dedicated function
+  some of them using execute(), which is just a function that will execute any query passed into it
+*/
+
 app.get('/:tableName', table_validator, async (req, res) => {
 
   const tableName = req.params.tableName;
@@ -63,6 +68,15 @@ app.get('/msc/tableInfo/:tableName', table_validator, async (req, res) => {
   const result = await crud.getColumns(tableName);
 
   res.send(result);
+})
+
+app.post('/msc/execute/', async (req, res) => { //for more complex queriess
+
+  const query = req.body.payloadData.query;
+  const result = await crud.execQuery(query);
+  
+  res.send(result);
+
 })
 
 module.exports = app;

@@ -17,7 +17,7 @@ const con = mysql.createConnection(mysql_config);
 
 //i cannot figure how to execute a normal mysql query with promise because the docs sucks
 //so i make my own function
-const execQuery = (con, query) => { 
+const execQuery = (query) => { 
 
   let result = {
     status: '',
@@ -27,8 +27,7 @@ const execQuery = (con, query) => {
   
   return new Promise((resolve) => {
 
-    con.query(query, (err, queryResult) => {
-
+    con.execute(query, (err, queryResult) => {
       if(err){
         result.status = res_statuses.STATUS_FAIL;
         result.err = err.message;
@@ -36,10 +35,7 @@ const execQuery = (con, query) => {
         result.status = res_statuses.STATUS_SUCCESS;
         result.value = queryResult;
       }
-
-      con.end();
       resolve(result);
-
     })
 
   })
@@ -180,7 +176,7 @@ const getColumns = async (tableName) => {
   return new Promise(async (resolve) => {
 
     const query = 'show columns from ' + tableName;
-    resolve(execQuery(con, query));
+    resolve(execQuery(query));
 
   })
 
@@ -206,4 +202,5 @@ module.exports = {
   remove,
   update,
   getColumns,
+  execQuery
 }
